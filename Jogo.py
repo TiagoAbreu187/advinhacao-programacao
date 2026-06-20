@@ -1,10 +1,24 @@
 import random
 
 def game():
-    numero = random.randint(1,100)
     tentativas = 0
-    # print(numero)
-    print("Um número entre 1 a 100 foi sorteado! Adivinhe!")
+    try:
+        menu = int(input("Escolha uma dificuldade!\n1 para 100 números\n2 para 500 números\n3 para 1000 números\nEscreva aqui->"))
+    except ValueError:
+        print("Digite apenas números!")
+        return
+    if menu == 1:
+        limite = 100
+    elif menu == 2:
+        limite = 500
+    elif menu == 3:
+        limite = 1000
+    else:
+        print("Número inválido")
+        return
+    
+    numero = random.randint(1,limite)
+    print("Um número de 1 a",limite,"foi sorteado! Tente encontra-lo!")
     
     while True:
         try:
@@ -12,10 +26,10 @@ def game():
         except ValueError:
             print("Digite apenas números!")
             continue
+        if escolha < 1 or escolha > limite:
+            print("Escolha um número entre 1 e",limite,"!")
+            continue
         
-        if escolha < 1 or escolha > 100:
-            print("Escolha um número entre 1 a 100!")    
-
         tentativas = tentativas + 1
         if numero > escolha:
             print("Seu número é menor que o número sorteado")
@@ -30,7 +44,7 @@ def game():
             elif tentativas >=5 and tentativas <=9:
                 print("Tá na média, dá pra melhorar")
             else:
-                print("Oque aconteceu?")
+                print("Você foi até o final!")
             break
 
 game()
