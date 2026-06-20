@@ -23,6 +23,14 @@ def game():
             print("Seu número é maior que o número sorteado")
         else:
             print("Você acertou em",tentativas,"tentativas!")
+            if tentativas == 1:
+                print("Você é muito sortudo!")
+            elif tentativas >=2 and tentativas <=4:
+                print("Você é bom!")
+            elif tentativas >=5 and tentativas <=9:
+                print("Tá na média, dá pra melhorar")
+            else:
+                print("Oque aconteceu?")
             break
 
 game()
