@@ -7,6 +7,9 @@ def game():
     
     try:
         reais = int(input("Quantos reais você quer apostar?\n->"))
+        if reais <= 0:
+            print("Digite um valor maior que zero!")
+            return
         print("Sorteando multiplicador...")
         time.sleep(2)
         multiplicador = random.choices(range(1, 16),weights=[90, 40, 25, 15, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],k=1)[0]
@@ -55,10 +58,10 @@ def game():
                 print("Você ganhou",(reais*multiplicador)*4,"reais!")
                 print("Você é bom!")
             elif tentativas >=5 and tentativas <=9:
-                print("Você ganhou",(reais*multiplicador)*2,"reais!")
+                print("Você ganhou",reais*multiplicador,"reais!")
                 print("Tá na média, dá pra melhorar")
             else:
-                print("Você foi até o final!")
+                print("Você perdeu a aposta!")
             break
 
 game()
