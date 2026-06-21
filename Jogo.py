@@ -2,14 +2,10 @@ import random
 import winsound
 import time
 
-def game():
+def game(reais):
     tentativas = 0
     
     try:
-        reais = int(input("Quantos reais você quer apostar?\n->"))
-        if reais <= 0:
-            print("Digite um valor maior que zero!")
-            return
         menu = int(input("Escolha uma dificuldade!\n1 para 100 números\n2 para 500 números\n3 para 1000 números\nEscreva aqui->"))
     except ValueError:
         print("Digite apenas números!")
@@ -66,7 +62,36 @@ def game():
                 premio = reais * multiplicador * bonus
                 print("Você ganhou R$", round(premio, 2))
             else:
+                premio = 0
                 print("Você perdeu a aposta!")
-            break
+            return premio
 
-game()
+saldo = 10
+
+while saldo > 0 and saldo < 2000:
+
+    print("\nSaldo atual: R$", round(saldo, 2))
+
+    try:
+        reais = float(input("Quantos reais você quer apostar?\n->"))
+    except ValueError:
+        print("Digite apenas números!")
+        continue
+    if reais <= 0:
+        print("Digite um valor maior que zero!")
+        continue
+    if reais > saldo:
+        print("Você não possui esse valor!")
+        continue
+
+    saldo = saldo - reais
+    premio = game(reais)
+    saldo = saldo + premio
+    print("Saldo atual: R$", round(saldo, 2))
+
+if saldo >= 2000:
+    print("\nParabéns! Você chegou a R$2.000!")
+    print("Saldo final: R$", round(saldo, 2))
+else:
+    print("\nVocê não vai conseguir pagar as contas!")
+    print("Você ficou sem dinheiro.")
